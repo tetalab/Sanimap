@@ -1,71 +1,18 @@
 <html>
 <head>
-<meta name="robots" content="index, follow" />
-<meta name="description" content="cacamap" />
-<meta name="author" content="tetalab" />
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<title>Tetalab sanimap</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<style>
-                        body, html {
-				margin:0;
-				padding:5;
-				font-family:Arial;
-			}
-			h1 {
-				margin-bottom:10px;
-			}
-			#main {
-				position:relative;
-				width:1020px;
-				padding:20px;
-				margin:auto;
-			}
-			#heatmapArea {
-				position:relative;
-				float:left;
-				width:800px;
-				height:600px;
-				border:1px dashed black;
-			}
-			#configArea {
-				position:relative;
-				float:left;
-				width:200px;
-				padding:15px;
-				padding-top:0;
-				padding-right:0;
-			}
-			.btn {
-				margin-top:25px;
-				padding:10px 20px 10px 20px;
-				-moz-border-radius:15px;
-				-o-border-radius:15px;
-				-webkit-border-radius:15px;
-				border-radius:15px;
-				border:2px solid black;
-				cursor:pointer;
-				color:white;
-				background-color:black;
-			}
-			#gen:hover{
-				background-color:grey;
-				color:black;
-			}
-			textarea{
-				width:260px;
-				padding:10px;
-				height:200px;
-			}
-			h2{
-				margin-top:0;
-			}
-		</style>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="tetalab" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tetalab sanimap</title>
+
+  <link rel="stylesheet" href="css/master.css" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
-<div id="main">
+  <div id="main">
 			<h1>Sanimap</h1>
 			<div id="heatmapArea">
 			
@@ -73,98 +20,21 @@
 			<div id="configArea">
 				<h2>Sanimap</h2>
 				Expérience sur l'opendata Toulousain<br /> Une bonne initiative mais le grand Toulouse a liberé des datas de peu d'intérêt<br />
-				<strong>Voici donc un mashup des plus utile issu de ces données, une carte de la densité des sanisettes. Une question se pose : peut on parler de "zones blanches" dans les zones d'absence?... </strong>
+        <strong>Voici donc un mashup des plus utile issu de ces données, une carte de la densité des sanisettes.
+          Une question se pose : peut on parler de "zones blanches" dans les zones d'absence?... </strong>
 				<div id="tog" class="btn">Afficher/masquer la map</div>
 			</div>
 			
-<div style="position:absolute;width:940px;top:750px;text-align:center;"> tetalab 2012 merci à <a href="http://www.patrick-wied.at/static/heatmapjs/">heatmap.js</a> par <a href="http://www.patrick-wied.at" target="_blank">Patrick Wied</a></div>
+      <div id="footer"> 
+        tetalab 2012 - 
+        merci à <a href="http://www.patrick-wied.at/static/heatmapjs/">heatmap.js</a> 
+        par <a href="http://www.patrick-wied.at" target="_blank">Patrick Wied</a>
+      </div>
+  </div>
 
-</div>
-<script type="text/javascript" src="http://www.patrick-wied.at/static/heatmapjs/src/heatmap.js"></script>
-<script type="text/javascript" src="http://www.patrick-wied.at/static/heatmapjs/src/heatmap-gmaps.js"></script>
-<script type="text/javascript">
-
-var map;
-var heatmap; 
-
-window.onload = function(){
-
-  var myLatlng = new google.maps.LatLng(43.60103,1.440754);
-	// sorry - this demo is a beta
-	// there is lots of work todo
-	// but I don't have enough time for eg redrawing on dragrelease right now
-	var myOptions = {
-	  zoom: 12,
-	  center: myLatlng,
-	  mapTypeId: google.maps.MapTypeId.ROADMAP,
-	  disableDefaultUI: false,
-	  scrollwheel: true,
-	  draggable: true,
-	  navigationControl: true,
-	  mapTypeControl: false,
-	  scaleControl: true,
-	  disableDoubleClickZoom: false
-	};
-	map = new google.maps.Map(document.getElementById("heatmapArea"), myOptions);
-	
-	heatmap = new HeatmapOverlay(map, {"radius":15, "visible":true, "opacity":60});
-	
-	
-	document.getElementById("tog").onclick = function(){
-		heatmap.toggle();
-	};
-	
-	var testData={
-    		max: 2,
-             data: [
-             {lat: 43.59760763 , lng: 1.43077006, count: 2}, 
-             {lat: 43.59901928 , lng: 1.43035278, count: 2}, 
-             {lat: 43.60348259 , lng: 1.43610296, count: 2}, 
-             {lat: 43.60155258 , lng: 1.43846487, count: 2}, 
-             {lat: 43.60831709 , lng: 1.43715117, count: 2}, 
-             {lat: 43.60812753 , lng: 1.42795549, count: 2}, 
-             {lat: 43.61001131 , lng: 1.43323681, count: 2}, 
-             {lat: 43.61165562 , lng: 1.43920999, count: 2}, 
-             {lat: 43.61030641 , lng: 1.44351542, count: 2}, 
-             {lat: 43.60872738 , lng: 1.45045488, count: 2}, 
-             {lat: 43.60654851 , lng: 1.44756751, count: 2}, 
-             {lat: 43.60602195 , lng: 1.44673584, count: 2}, 
-             {lat: 43.60510353 , lng: 1.44788847, count: 2}, 
-             {lat: 43.60533873 , lng: 1.44886839, count: 2}, 
-             {lat: 43.6088769 , lng: 1.45363658, count: 2}, 
-             {lat: 43.60655151 , lng: 1.45222039, count: 2}, 
-             {lat: 43.6057887 , lng: 1.45223721, count: 2}, 
-             {lat: 43.60320702 , lng: 1.45536591, count: 2}, 
-             {lat: 43.60124053 , lng: 1.45215637, count: 2}, 
-             {lat: 43.60274908 , lng: 1.44805647, count: 2}, 
-             {lat: 43.60030092 , lng: 1.44390508, count: 2}, 
-             {lat: 43.59726479 , lng: 1.44421005, count: 2}, 
-             {lat: 43.59953693 , lng: 1.45459493, count: 2}, 
-             {lat: 43.59646914 , lng: 1.45396848, count: 2}, 
-             {lat: 43.594347 , lng: 1.45586165, count: 2}, 
-             {lat: 43.59238296 , lng: 1.45126574, count: 2}, 
-             {lat: 43.62690474 , lng: 1.43336912, count: 2}, 
-             {lat: 43.56483074 , lng: 1.4101753, count: 2}, 
-             {lat: 43.62028737 , lng: 1.43528614, count: 2}, 
-             {lat: 43.61858847 , lng: 1.45655513, count: 2}, 
-             {lat: 43.61947339 , lng: 1.46902286, count: 2}, 
-             {lat: 43.60674995 , lng: 1.45982608, count: 2}, 
-             {lat: 43.57927252 , lng: 1.48357725, count: 2}, 
-             {lat: 43.57947622 , lng: 1.45918784, count: 2}, 
-             {lat: 43.58104332 , lng: 1.44927686, count: 2}, 
-             {lat: 43.57724923 , lng: 1.43991339, count: 2}, 
-             {lat: 43.58477928 , lng: 1.4282637, count: 2}, 
-             {lat: 43.57877133 , lng: 1.41178584, count: 2}, 
-             {lat: 43.6126004 , lng: 1.44823107, count: 2}] 
-    	};
-    
-	
-	// this is important, because if you set the data set too early, the latlng/pixel projection doesn't work
-	google.maps.event.addListenerOnce(map, "idle", function(){
-		heatmap.setDataSet(testData);
-	});
-};
-
-</script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="js/heatmap.js"></script>
+  <script type="text/javascript" src="js/heatmap-gmaps.js"></script>
+  <script type="text/javascript" src="js/master.js"></script>
 </body>
 </html>
